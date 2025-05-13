@@ -7,4 +7,9 @@ urlpatterns = [
     path('api/', include('users.urls')),  # Include users app URLs
      path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
      path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+         path('api/', include('products.urls')),
+             path('api/', include('storage.urls')),
+               path('api/', include('orders.urls')),
+               path('api/', include('messaging.urls')),
+          path('api/', include('inventory.urls')),
 ]

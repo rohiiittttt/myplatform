@@ -45,10 +45,3 @@ class LoginView(APIView):
         return Response({
             'token': token
         })
-class ProductListView(APIView):
-    permission_classes = [IsAuthenticated]  # Require authentication for this view
-
-    def get(self, request):
-        # Only authenticated users can access this view
-        products = [{'name': 'Product 1', 'price': 100}, {'name': 'Product 2', 'price': 200}]
-        return Response({'products': products})

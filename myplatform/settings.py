@@ -13,6 +13,14 @@ import os
 from dotenv import load_dotenv
 
 from pathlib import Path
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=6),     # Access token valid for 6 hours
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),    # Refresh token valid for 14 days
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +50,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users',  # Ensure 'users' app is present
+    'users', 
+    'products',
+    'inventory',
+    'storage',
+    'orders',
+    'messaging',
+
 ]
 
 REST_FRAMEWORK = {
