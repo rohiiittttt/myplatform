@@ -6,6 +6,7 @@ from rest_framework import status
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated  # Import IsAuthenticated
+from django.shortcuts import render
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -52,3 +53,6 @@ class ProductListView(APIView):
         # Only authenticated users can access this view
         products = [{'name': 'Product 1', 'price': 100}, {'name': 'Product 2', 'price': 200}]
         return Response({'products': products})
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')

@@ -1,0 +1,222 @@
+:root {
+  --bg-main: #ffffff;
+  --bg-sidebar: #f0f0f0;
+  --bg-navbar: #eaeaea;
+  --text-color: #121212;
+  --card-bg: #ffffff;
+  --highlight: #6C5CE7;
+}
+
+body.dark {
+  --bg-main: #121212;
+  --bg-sidebar: #1f1f1f;
+  --bg-navbar: #1a1a1a;
+  --text-color: white;
+  --card-bg: #1a1a1a;
+  --highlight: #6C5CE7;
+}
+
+
+
+/* Base layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-color);
+}
+
+/* Full layout: sidebar + right side */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-title span {
+  display: none;
+}
+/* Sidebar */
+.sidebar {
+  width: 180px;
+  background-color: var(--bg-sidebar);
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar .sidebar-title {
+  display: inline-block;
+  transition: opacity 0.3s;
+}
+
+.sidebar.collapsed .sidebar-title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar button#toggleSidebar {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 18px;
+}
+
+/* Icons + text */
+.nav-menu ul, .sidebar-footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.nav-menu li,
+.sidebar-footer li {
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.nav-menu li:hover,
+.sidebar-footer li:hover,
+.nav-menu li.active {
+  background-color: var(--highlight);
+}
+
+/* Right side: navbar + content */
+.main-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar.collapsed li span {
+  visibility: hidden;
+  width: 0;
+}
+
+/* Top navbar */
+.top-navbar {
+  background-color: #1a1a1a;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+.search-box {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: #2a2a2a;
+  color: white;
+  width: 300px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #888;
+  border-radius: 50%;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: var(--card-bg);
+  overflow-y: auto;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+
+
+
+
+/* Show full title only when sidebar is expanded */
+.sidebar .full-title {
+  display: block;
+}
+.sidebar.collapsed .full-title {
+  display: none;
+}
+
+/* Show mini title only when collapsed */
+.sidebar .mini-title {
+  display: none;
+  font-size: 10px;
+}
+.sidebar.collapsed .mini-title {
+  display: block;
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.theme-btn:hover {
+  background-color: var(--highlight);
+}
+
