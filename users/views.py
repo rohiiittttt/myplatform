@@ -6,6 +6,7 @@ from rest_framework import status
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated  # Import IsAuthenticated
+from django.shortcuts import render
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -45,3 +46,6 @@ class LoginView(APIView):
         return Response({
             'token': token
         })
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')

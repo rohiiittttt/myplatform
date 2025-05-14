@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <!-- Sidebar on the left -->
+  {% include 'includes/sidebar.html' %}
+
+  <!-- Right section: Top navbar + content -->
+  <div class="main-section">
+    {% include 'includes/navbar.html' %}
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<!-- <script>
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+</script> -->
+<!-- <script>
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.getElementById('sidebar');
+  const themeToggle = document.getElementById('toggleTheme');
+  const body = document.body;
+
+  // Sidebar toggle
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+
+  // Load theme from localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+  }
+
+  // Toggle theme
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const theme = body.classList.contains('dark') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+  });
+</script> -->
+<!-- <script>
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.getElementById('sidebar');
+  const themeToggle = document.getElementById('toggleTheme');
+  const body = document.body;
+
+  // Sidebar toggle
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+
+  // Load theme from localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark');
+  }
+
+  // Toggle dark/light theme
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+    // Optional: Change icon
+    themeToggle.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+    themeToggle.querySelector('span').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+  });
+</script> -->
+
+<script>
+  const toggleSidebarBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.getElementById('sidebar');
+  const toggleThemeBtn = document.getElementById('toggleTheme');
+  const body = document.body;
+
+  // Sidebar toggle
+  toggleSidebarBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    body.classList.add('dark');
+    toggleThemeBtn.querySelector('i').className = 'fas fa-moon';
+    toggleThemeBtn.querySelector('span').textContent = 'Dark Mode';
+  } else {
+    body.classList.remove('dark');
+    toggleThemeBtn.querySelector('i').className = 'fas fa-sun';
+    toggleThemeBtn.querySelector('span').textContent = 'Light Mode';
+  }
+
+  // Toggle theme on click
+  toggleThemeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    const isDark = body.classList.contains('dark');
+
+    // Update button
+    toggleThemeBtn.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+    toggleThemeBtn.querySelector('span').textContent = isDark ? 'Dark Mode' : 'Light Mode';
+
+    // Save preference
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
+
+
+
+</body>
+</html>
