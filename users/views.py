@@ -19,7 +19,7 @@ from django.shortcuts import redirect
 from .serializers import UserSerializer
 from rest_framework import viewsets, permissions
 from products.serializers import ProductSerializer
-
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -84,7 +84,31 @@ class RegisterView(View):
         except Exception as e:
             print("Registration error:", str(e))  # 🔍 Add print for debugging
             return JsonResponse({"error": str(e)}, status=500)
-        
+
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({"detail": "Successfully logged out."}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"error": "Invalid refresh token."}, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({"detail": "Successfully logged out."}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({"error": "Invalid refresh token."}, status=status.HTTP_400_BAD_REQUEST)
+
 def dashboard_view(request):
     token = request.COOKIES.get('jwt')
     if not token:

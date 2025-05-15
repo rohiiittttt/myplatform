@@ -7,6 +7,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .views import products_page
 from .views import create_product_view
+from .views import LogoutView
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -20,6 +21,7 @@ urlpatterns = [
     # API endpoints
     path('api/login/', TokenObtainPairView.as_view(), name='login_api'),
     path('api/register/', RegisterView.as_view(), name='register_api'),
+    path('api/logout/', LogoutView.as_view(), name='logout'),
 
     # Optional protected route (for testing token)
     path('api/protected/', ProtectedView.as_view(), name='protected_api'),
