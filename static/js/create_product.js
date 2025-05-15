@@ -32,7 +32,7 @@ document.getElementById('create-product-form').addEventListener('submit', async 
         }
 
         alert("Product added successfully!");
-        window.location.href = "/dashboard/";
+        window.location.href = "/products/";
     } catch (err) {
         console.error("Unexpected error:", err);
         alert("Unexpected error: " + err.message);

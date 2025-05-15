@@ -17,8 +17,12 @@
   
     <nav class="nav-menu">
         <ul>
-            <li class="active"><i class="fas fa-home"></i> <span>Dashboard</span></li>
-            <li><i class="fas fa-box-open"></i> <span>Products</span></li>
+            <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+                <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="{% if request.path == '/products/' or request.path == '/create-product/' %}active{% endif %}">
+                <a href="{% url 'products_page' %}"><i class="fas fa-box-open"></i> <span>Products</span></a>
+            </li>              
             <li><i class="fas fa-comments"></i> <span>Chat</span></li>
             <li><i class="fas fa-shopping-cart"></i> <span>Orders</span></li>
             <li><i class="fas fa-store-alt"></i> <span>Rent Space</span></li>
@@ -26,6 +30,13 @@
             <li><i class="fas fa-bell"></i> <span>Notification</span></li>
         </ul>
     </nav>
+    <nav class="nav-menu">
+        <ul>
+         
+        </ul>
+    </nav>
+      
+      
   
     <div class="sidebar-footer">
       <ul>
