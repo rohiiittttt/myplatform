@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="main-content">
-    <div class="header-section">
-        <h1>Your Products</h1>
-        <button onclick="window.location.href='/create-product/'">+ Add Product</button>
-    </div>
+<div class="header-section">
+    <h1 class="page-title">Your Products</h1>
+    <button class="add-btn" onclick="window.location.href='/create-product/'">
+      <i class="fas fa-plus"></i> Add Product
+    </button>
+  
 
     <div id="product-list" class="product-list">
         <!-- Products will load here -->
