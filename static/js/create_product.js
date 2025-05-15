@@ -8,7 +8,7 @@ document.getElementById('create-product-form').addEventListener('submit', async 
     const stock = document.getElementById('stock').value;
 
     try {
-        const response = await fetch('/api/products/', {
+        const response = await fetch('/api/products/create-product/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

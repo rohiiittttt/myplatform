@@ -3,24 +3,25 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from .models import Product
 from .serializers import ProductSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class ProductListView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         products = Product.objects.filter(user=request.user)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
-
-class ProductCreateView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    
+class CreateProductView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = ProductSerializer(data=request.data)
+        serializer = ProductSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 class ProductEditView(APIView):
     permission_classes = [permissions.IsAuthenticated]
