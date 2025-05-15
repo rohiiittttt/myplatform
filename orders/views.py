@@ -11,7 +11,7 @@ class OrderRequestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return OrderRequest.objects.filter(Q(buyer=user) | Q(product__user=user))
+        return OrderRequest.objects.filter(Q(buyer=user) | Q(product__user=user))  # ✅ fixed here
 
     def perform_create(self, serializer):
         serializer.save(buyer=self.request.user)
@@ -19,7 +19,7 @@ class OrderRequestViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
 
-        # Only product owner (seller) can approve/decline
+        # ✅ Only the seller can update order status
         if instance.product.user != request.user:
             return Response({"detail": "Only the seller can update this order."}, status=status.HTTP_403_FORBIDDEN)
 

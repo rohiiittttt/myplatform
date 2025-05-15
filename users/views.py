@@ -115,3 +115,15 @@ def create_product_view(request):
 
 def messaging_page(request):
     return render(request, 'messaging.html')
+
+def orders_page(request):
+    return render(request, 'orders.html')
+
+
+def buyer_orders_view(request):
+    return render(request, "buyer_orders.html")
+
+from django.shortcuts import render
+
+def buyer_products_page(request):
+    return render(request, 'buyer_products.html')  # Make sure you create this HTML file later

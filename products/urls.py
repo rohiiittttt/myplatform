@@ -6,10 +6,12 @@ from .views import (
     ProductDeleteView
 )
 path('api/products/', include('products.urls')),
+from .views import AvailableProductsForBuyer
 
 urlpatterns = [
     path('all-products/', ProductListView.as_view(), name='all-products'),
     path('create-product/', CreateProductView.as_view(), name='create-product'),
     path('edit-product/<int:pk>/', ProductEditView.as_view(), name='edit-product'),
     path('delete-product/<int:pk>/', ProductDeleteView.as_view(), name='delete-product'),
+    path('available/', AvailableProductsForBuyer.as_view(), name='available_products'),
 ]

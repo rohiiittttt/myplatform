@@ -5,6 +5,7 @@ from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
 
+
 class ProductListView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -12,7 +13,8 @@ class ProductListView(APIView):
         products = Product.objects.filter(user=request.user)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
-    
+
+
 class CreateProductView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -22,6 +24,7 @@ class CreateProductView(APIView):
             serializer.save(user=request.user)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
 
 class ProductEditView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -38,6 +41,7 @@ class ProductEditView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProductDeleteView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -49,3 +53,12 @@ class ProductDeleteView(APIView):
 
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AvailableProductsForBuyer(APIView):  # ✅ un-indented properly
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        products = Product.objects.exclude(user=request.user)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)

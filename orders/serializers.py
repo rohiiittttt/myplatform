@@ -16,10 +16,11 @@ class BuyerSummarySerializer(serializers.ModelSerializer):
         fields = ['id', 'username']
 
 class OrderRequestSerializer(serializers.ModelSerializer):
-    product = ProductSummarySerializer(read_only=True)
-    buyer = BuyerSummarySerializer(read_only=True)
+    buyer_username = serializers.CharField(source='buyer.username', read_only=True)
+    product_name = serializers.CharField(source='product.name', read_only=True)
 
     class Meta:
         model = OrderRequest
-        fields = '__all__'
-        read_only_fields = ['buyer', 'status', 'created_at', 'updated_at']
+        fields = ['id', 'product', 'product_name', 'buyer', 'buyer_username', 'quantity', 'status', 'message', 'created_at']
+        read_only_fields = ['id', 'created_at', 'buyer']
+

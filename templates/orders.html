@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <div class="main-content">
-    <h1>Orders</h1>
-    <p>View and handle customer orders here.</p>
+    <h1>Your Orders</h1>
+    <div id="orders-list" class="order-list">
+        <!-- Orders will be loaded here -->
+    </div>
 </div>
+
+<script src="/static/js/orders.js"></script>
 {% endblock %}
