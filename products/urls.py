@@ -1,10 +1,10 @@
-from django.urls import path, include  # ✅ You were missing this line
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import ProductViewSet
 
 router = DefaultRouter()
-router.register(r'products', ProductViewSet)
+router.register(r'', ProductViewSet, basename='product')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(router.urls)),  # ✅ Enables POST /api/products/
 ]

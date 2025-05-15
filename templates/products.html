@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <div class="header-section">
+        <h1>Your Products</h1>
+        <button onclick="window.location.href='/create-product/'">+ Add Product</button>
+    </div>
+
+    <div id="product-list" class="product-list">
+        <!-- Products will load here -->
+    </div>
+</div>
+
+<script src="/static/js/products.js"></script>
+{% endblock %}

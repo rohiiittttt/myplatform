@@ -220,3 +220,29 @@ body {
   background-color: var(--highlight);
 }
 
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-list {
+  display: grid;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.product-card h2 {
+  margin: 0 0 10px;
+}
+
+.product-card p {
+  margin: 4px 0;
+}

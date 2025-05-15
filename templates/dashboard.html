@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
-
 {% block content %}
-  <h1>Welcome to the Dashboard</h1>
+<div class="main-content">
+    <h1 id="welcome-msg">Loading...</h1>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Link to the JS file -->
+<script src="/static/js/dashboard.js"></script>
 {% endblock %}

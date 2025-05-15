@@ -6,15 +6,21 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('users.urls')),  # Include users app URLs
-     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('', include('users.urls')),
-         path('api/', include('products.urls')),
-             path('api/', include('storage.urls')),
-               path('api/', include('orders.urls')),
-               path('api/', include('messaging.urls')),
-          path('api/', include('inventory.urls')),
+
+    # JWT auth endpoints
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Functional app routes
+    path('api/users/', include('users.urls')),
+    path('api/products/', include('products.urls')),
+    path('api/storage/', include('storage.urls')),
+    path('api/orders/', include('orders.urls')),
+    path('api/messaging/', include('messaging.urls')),
+    path('api/inventory/', include('inventory.urls')),
+
+    # UI pages
+    path('', include('users.urls')),  # for /login, /register, /dashboard etc.
 ]
 
 if settings.DEBUG:

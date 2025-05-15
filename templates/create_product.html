@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <h1>Create Product</h1>
+    <form id="create-product-form" class="auth-form">
+        <label for="name">Product Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea><br><br>
+
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" required><br><br>
+
+        <label for="stock">Stock:</label><br>
+        <input type="number" id="stock" name="stock" required><br><br>
+
+        <button type="submit">Add Product</button>
+    </form>
+</div>
+
+<!-- Load the JS file -->
+<script src="{% static 'js/create_product.js' %}"></script>
+{% endblock %}
