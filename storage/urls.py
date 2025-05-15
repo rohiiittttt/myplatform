@@ -1,10 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import StorageProviderViewSet
-
-router = DefaultRouter()
-router.register(r'storage', StorageProviderViewSet)
+from django.urls import path
+from .views import StorageListView, StorageBookView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', StorageListView.as_view(), name='storage-list'),
+    path('<int:pk>/', StorageBookView.as_view(), name='storage-book'),
 ]
