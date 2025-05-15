@@ -23,25 +23,21 @@
             <li class="{% if request.path == '/products/' or request.path == '/create-product/' %}active{% endif %}">
                 <a href="{% url 'products_page' %}"><i class="fas fa-box-open"></i> <span>Products</span></a>
             </li>              
-            <li><i class="fas fa-comments"></i> <span>Chat</span></li>
-            <li><i class="fas fa-shopping-cart"></i> <span>Orders</span></li>
+            <li class="{% if request.path == '/chat/' %}active{% endif %}">
+                <a href="{% url 'messaging_page' %}"><i class="fas fa-comments"></i> <span>Chat</span></a>
+            </li>
+            <li class="{% if request.path == '/orders/buyer/' %}active{% endif %}">
+                <a href="{% url 'buyer_orders_page' %}"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
+            </li>
             <li><i class="fas fa-store-alt"></i> <span>Rent Space</span></li>
             <li><i class="fas fa-question-circle"></i> <span>FAQ</span></li>
             <li><i class="fas fa-bell"></i> <span>Notification</span></li>
         </ul>
     </nav>
-    <nav class="nav-menu">
-        <ul>
-         
-        </ul>
-    </nav>
-      
-      
-  
+
     <div class="sidebar-footer">
       <ul>
         <li><i class="fas fa-cog"></i> <span>Settings</span></li>
-        <li><i class="fas fa-question-circle"></i> <span>Help Center</span></li>
         <li id="toggleTheme"><i class="fas fa-moon"></i> <span>Dark Mode</span></li>
       </ul>
     </div>

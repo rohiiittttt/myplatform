@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chat</title>
-    <link rel="stylesheet" href="/static/css/chat.css"> <!-- Optional -->
-</head>
-<body>
-    <div class="chat-container">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
         <h2>Inbox</h2>
-
-        <!-- Recipient ID (for demo/testing) -->
         <input type="text" id="recipient-id" placeholder="Recipient User ID">
-
-        <!-- Chat Box -->
-        <div id="chat-box" class="chat-box" style="border:1px solid #ccc; padding:10px; margin:10px 0; height:300px; overflow-y:auto;">
-            Loading messages...
-        </div>
-
-        <!-- Message Input -->
-        <input type="text" id="message-input" placeholder="Type your message..." style="width: 80%;">
-        <button id="send-button">Send</button>
     </div>
 
-    <script src="/static/js/chat.js"></script>
-</body>
-</html>
+    <div id="chat-box" class="chat-box">
+        Loading messages...
+    </div>
+
+    <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+<script src="/static/js/chat.js"></script>
+{% endblock %}

@@ -2,10 +2,12 @@
 {% load static %}
 {% block content %}
 <div class="main-content">
-    <button class="back-btn" onclick="window.location.href='{% url 'products_page' %}'">
-        <i class="fas fa-arrow-left"></i>
-    </button>      
-    <h1 class="page-title">Create Product</h1>
+    <div class="header-section">
+        <button class="back-btn" onclick="window.location.href='{% url 'products_page' %}'">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1 class="page-title">Create Product</h1>
+    </div>
     <form id="create-product-form" class="auth-form">
         <label for="name">Product Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
