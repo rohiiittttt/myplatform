@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="main-content">
-    <h1>Register</h1>
-    <p>Create a new seller account.</p>
+    <h1 class="page-title">Register</h1>
+    <p class="items">Create a new seller account.</p>
     <form class="auth-form">
         {% csrf_token %}
         <label for="username">Username:</label><br>
@@ -15,5 +15,5 @@
     </form>
 </div>
     <script src="/static/js/register.js"></script>
-    <p>Already have an account? <a href="/login/">Login here</a></p>
+    <p class="items">Already have an account? <a href="/login/">Login here</a></p>
 {% endblock %}
