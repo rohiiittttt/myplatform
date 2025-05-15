@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="main-content">
-    <h1>Messaging</h1>
-    <p>Read and respond to messages here.</p>
+    <h2>Chat</h2>
+    <div id="chat-box" class="chat-box" style="margin-bottom: 1rem;"></div>
+
+    <div class="chat-form">
+        <input type="text" id="recipient-id" placeholder="Recipient User ID" />
+        <input type="text" id="message-input" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
 </div>
+
+<script src="{% static 'js/chat.js' %}"></script>
 {% endblock %}

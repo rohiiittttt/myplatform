@@ -6,6 +6,7 @@ from .views import (
 )
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView
+from .views import messaging_page
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -21,6 +22,7 @@ urlpatterns = [
     path('api/register/', RegisterView.as_view(), name='register_api'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
     path('api/products/', include('products.urls')),  # ✅ connects to CreateProductView
+    path('chat/', messaging_page, name='messaging_page'),
 
     path('api/protected/', ProtectedView.as_view(), name='protected_api'),
 
