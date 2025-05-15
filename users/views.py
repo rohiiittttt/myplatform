@@ -1,43 +1,42 @@
-import jwt
 import json
-from django.conf import settings
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.shortcuts import render
+import jwt
 from datetime import datetime, timedelta
+from django.conf import settings
+from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.views import View
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from .serializers import UserSerializer
-from rest_framework import viewsets, permissions
-from products.serializers import ProductSerializer
+
+from rest_framework import status, permissions, viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
+
+from .serializers import UserRegistrationSerializer, UserSerializer, CustomTokenObtainPairSerializer
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# ===================== API VIEWS =====================
 
-    def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)  
-    
-class ProtectedView(APIView):
-    permission_classes = [IsAuthenticated]
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
 
-    def get(self, request):
-        return Response({ "username": request.user.username })
+    def post(self, request):
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LoginView(APIView):
-    permission_classes = []  # No authentication needed for login view
+    permission_classes = []
 
     def post(self, request):
         username = request.data.get('username')
@@ -55,66 +54,44 @@ class LoginView(APIView):
             'exp': datetime.utcnow() + timedelta(days=1)
         }
 
-        try:
-            token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-        except Exception as e:
-            return Response({"detail": f"Error generating token: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
         return Response({'token': token})
 
-@method_decorator(csrf_exempt, name='dispatch')
-class RegisterView(View):
-    def post(self, request):
-        try:
-            data = json.loads(request.body)
-            username = data.get("username")
-            password = data.get("password")
-            email = data.get("email")
 
-            print("Registering user:", username, email)
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
-            if not username or not password or not email:
-                return JsonResponse({"error": "All fields are required."}, status=400)
-
-            if User.objects.filter(username=username).exists():
-                return JsonResponse({"error": "Username already exists."}, status=400)
-
-            user = User.objects.create_user(username=username, password=password, email=email)
-            return JsonResponse({"message": "User created successfully."})
-        except Exception as e:
-            print("Registration error:", str(e))  # 🔍 Add print for debugging
-            return JsonResponse({"error": str(e)}, status=500)
 
 class LogoutView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()
-
-            return Response({"detail": "Successfully logged out."}, status=status.HTTP_205_RESET_CONTENT)
+            return Response({"message": "Logout successful"}, status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
-            return Response({"error": "Invalid refresh token."}, status=status.HTTP_400_BAD_REQUEST)
-    permission_classes = (IsAuthenticated,)
+            return Response({"error": "Invalid refresh token"}, status=status.HTTP_400_BAD_REQUEST)
 
-    def post(self, request):
-        try:
-            refresh_token = request.data["refresh"]
-            token = RefreshToken(refresh_token)
-            token.blacklist()
 
-            return Response({"detail": "Successfully logged out."}, status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            return Response({"error": "Invalid refresh token."}, status=status.HTTP_400_BAD_REQUEST)
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
 
-def dashboard_view(request):
-    token = request.COOKIES.get('jwt')
-    if not token:
-        return redirect('/login/')
-    return render(request, 'dashboard.html')
+    def get(self, request):
+        return Response({"username": request.user.username})
 
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+
+# ===================== PAGE VIEWS =====================
 
 def dashboard_view(request):
     return render(request, 'dashboard.html')
@@ -127,8 +104,26 @@ def login_page(request):
 def register_page(request):
     return render(request, 'register.html')
 
+
 def products_page(request):
     return render(request, 'products.html')
 
+
 def create_product_view(request):
     return render(request, 'create_product.html')
+
+
+def messaging_page(request):
+    return render(request, 'messaging.html')
+
+def orders_page(request):
+    return render(request, 'orders.html')
+
+
+def buyer_orders_view(request):
+    return render(request, "buyer_orders.html")
+
+from django.shortcuts import render
+
+def buyer_products_page(request):
+    return render(request, 'buyer_products.html')  # Make sure you create this HTML file later

@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/orders/', include('orders.urls')),
     path('api/messaging/', include('messaging.urls')),
     path('api/inventory/', include('inventory.urls')),
+  
 
     # UI pages
     path('', include('users.urls')),  # for /login, /register, /dashboard etc.
