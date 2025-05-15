@@ -24,12 +24,12 @@ async function fetchProducts() {
                         <p><strong>Stock:</strong> ${product.stock}</p>
                         <p>${product.description}</p>
                         <button onclick="editProduct(${product.id})">Edit</button>
-                        <button onclick="deleteProduct(${product.id})">Delete</button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
                     </div>
                 `).join("");
             }
         } else {
-            list.innerHTML = "<p>Failed to load products.</p>";
+            list.innerHTML = "<p >Failed to load products.</p>";
         }
     } catch (err) {
         console.error("Error fetching products:", err);

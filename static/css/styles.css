@@ -8,7 +8,7 @@
 }
 
 body.dark {
-  --bg-main: #121212;
+  --bg-main: #282727;
   --bg-sidebar: #1f1f1f;
   --bg-navbar: #1a1a1a;
   --text-color: white;
@@ -181,7 +181,7 @@ body {
 .main-content {
   flex: 1;
   padding: 30px;
-  background-color: var(--card-bg);
+  background-color: var(--bg-main);
   overflow-y: auto;
 }
 
@@ -429,4 +429,9 @@ body {
 
 .add-btn:hover {
   background-color: var(--highlight);
+}
+
+.product-card .delete-btn {
+  background-color: #e74c3c;
+  color: white;
 }
