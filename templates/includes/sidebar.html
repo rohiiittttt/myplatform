@@ -29,7 +29,9 @@
             <li class="{% if request.path == '/orders/buyer/' %}active{% endif %}">
                 <a href="{% url 'buyer_orders_page' %}"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
             </li>
-            <li><i class="fas fa-store-alt"></i> <span>Rent Space</span></li>
+            <li class="{% if request.path == '/storage/' %}active{% endif %}">
+                <a href="{% url 'storage_page' %}"><i class="fas fa-store-alt"></i> <span>Rent Space</span></a>
+            </li>
             <li><i class="fas fa-question-circle"></i> <span>FAQ</span></li>
             <li><i class="fas fa-bell"></i> <span>Notification</span></li>
             <li class="{% if request.path == '/settings/' %}active{% endif %}">

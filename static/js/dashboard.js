@@ -24,7 +24,45 @@ async function fetchUserInfo() {
     }
 }
 
+async function loadDashboardMessages() {
+    const token = localStorage.getItem("token");
+    const chatBox = document.getElementById("dashboard-chat-box");
+  
+    if (!token || !chatBox) return;
+  
+    try {
+      const res = await fetch('/api/messaging/', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        const lastFive = data.slice(-5);
+        chatBox.innerHTML = lastFive.map(msg => `
+          <div class="message-preview">
+            <strong>${msg.sender_username || msg.sender}:</strong> ${msg.message_content}
+          </div>
+        `).join('');
+      } else {
+        chatBox.innerHTML = "<p>Failed to load messages.</p>";
+      }
+    } catch (error) {
+      chatBox.innerHTML = "<p>Error loading messages.</p>";
+      console.error(error);
+    }
+}  
+
 function logout() {
     localStorage.removeItem("token");
     window.location.href = "/login/";
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchUserInfo();
+    loadDashboardMessages(); // Load messages into dashboard
+  });
+  
