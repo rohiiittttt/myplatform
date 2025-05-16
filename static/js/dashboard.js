@@ -55,43 +55,6 @@ async function loadDashboardMessages() {
     }
 }  
 
-// async function fetchProducts() {
-//     const token = localStorage.getItem("token");
-//     const list = document.getElementById("product-list");
-
-//     try {
-//         const res = await fetch("/api/products/all-products/", {
-//             headers: {
-//                 Authorization: "Bearer " + token
-//             }
-//         });
-
-//         const data = await res.json();
-
-//         if (res.ok) {
-//             if (data.length === 0) {
-//                 list.innerHTML = "<p>No products yet.</p>";
-//             } else {
-//                 list.innerHTML = data.map(product => `
-//                     <div class="product-card">
-//                         <h2>${product.name}</h2>
-//                         <p><strong>Price:</strong> $${product.price}</p>
-//                         <p><strong>Stock:</strong> ${product.stock}</p>
-//                         <p>${product.description}</p>
-//                         <button onclick="editProduct(${product.id})">Edit</button>
-//                         <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
-//                     </div>
-//                 `).join("");
-//             }
-//         } else {
-//             list.innerHTML = "<p >Failed to load products.</p>";
-//         }
-//     } catch (err) {
-//         console.error("Error fetching products:", err);
-//         list.innerHTML = "<p>Server error. Please try again later.</p>";
-//     }
-// }
-
 async function fetchProducts() {
     const token = localStorage.getItem("token");
     const list = document.getElementById("product-list");
