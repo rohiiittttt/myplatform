@@ -10,6 +10,9 @@ from .views import messaging_page
 from .views import orders_page
 from .views import buyer_orders_view
 from . import views
+from .views import UpdateUserInfoView
+from .views import settings_page
+
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -26,6 +29,8 @@ urlpatterns = [
     path('api/logout/', LogoutView.as_view(), name='logout'),
     path('api/products/', include('products.urls')),
     path('api/protected/', ProtectedView.as_view(), name='protected_api'),
+    path('api/update-user/', UpdateUserInfoView.as_view(), name='update_user_info'),
+
 
     # Frontend pages
     path('chat/', messaging_page, name='messaging_page'),
@@ -34,4 +39,5 @@ urlpatterns = [
     path('buyer-products/', views.buyer_products_page, name='buyer_products_page'),
     path('products/', products_page, name='products_page'),
     path('create-product/', create_product_view, name='create_product'),
+    path('settings/', settings_page, name='settings_page'),  # <-- for frontend
 ]

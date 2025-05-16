@@ -20,7 +20,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 
 from .serializers import UserRegistrationSerializer, UserSerializer, CustomTokenObtainPairSerializer
-
+from rest_framework.response import Response
+from rest_framework import status
 
 # ===================== API VIEWS =====================
 
@@ -90,7 +91,24 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return User.objects.filter(id=self.request.user.id)
 
+class UpdateUserInfoView(APIView):
+    permission_classes = [IsAuthenticated]
 
+    def put(self, request):
+        user = request.user
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        if username:
+            user.username = username
+        if email:
+            user.email = email
+        if password:
+            user.set_password(password)
+
+        user.save()
+        return Response({"message": "User information updated successfully."})
 # ===================== PAGE VIEWS =====================
 
 def dashboard_view(request):
@@ -127,3 +145,6 @@ from django.shortcuts import render
 
 def buyer_products_page(request):
     return render(request, 'buyer_products.html')  # Make sure you create this HTML file later
+
+def settings_page(request):
+    return render(request, 'settings_page.html')
