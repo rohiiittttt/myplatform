@@ -1,11 +1,35 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
 <div class="main-content">
-    <h1 id="welcome-msg">Loading...</h1>
-    <button onclick="logoutt()">Logout</button>
+  <h1 id="welcome-msg">Loading...</h1>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <h3>Total Products</h3>
+      <p id="total-products">--</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Total Orders</h3>
+      <p id="total-orders">--</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Revenue</h3>
+      <p id="revenue">£--</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>Messages</h3>
+      <p id="messages">--</p>
+    </div>
+    <div class="dashboard-card single-row">
+        <h3>Latest Messages</h3>
+        <div id="dashboard-chat-box" class="dashboard-chat-box">
+          <p>Loading messages...</p>
+        </div>
+    </div>
+
 </div>
 
-<!-- Link to the JS file -->
 <script src="/static/js/dashboard.js"></script>
 {% endblock %}
