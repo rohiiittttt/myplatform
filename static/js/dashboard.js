@@ -72,7 +72,6 @@ async function fetchProducts() {
             if (data.length === 0) {
                 list.innerHTML = "<p>No products yet.</p>";
             } else {
-                // 🟣 Get only the last two
                 const latestTwo = data.slice(-2).reverse();
 
                 list.innerHTML = latestTwo.map(product => `
