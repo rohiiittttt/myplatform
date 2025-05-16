@@ -1,32 +1,36 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status
 from .models import StorageProvider
 from .serializers import StorageProviderSerializer
 
+
 class StorageListView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        storage = StorageProvider.objects.all()
-        serializer = StorageProviderSerializer(storage, many=True)
+        storages = StorageProvider.objects.all()
+        serializer = StorageProviderSerializer(storages, many=True)
         return Response(serializer.data)
 
 
-class StorageBookView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def book_storage(request, storage_id):
+    try:
+        storage = StorageProvider.objects.get(id=storage_id)
 
-    def post(self, request, pk):
-        try:
-            storage = StorageProvider.objects.get(pk=pk)
-        except StorageProvider.DoesNotExist:
-            return Response({'error': 'Storage not found'}, status=status.HTTP_404_NOT_FOUND)
+        if storage.status != "available":
+            return Response({"detail": "Storage not available."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if storage.status == 'rented':
-            return Response({'error': 'This storage is already rented.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        storage.status = 'rented'
-        storage.current_occupancy = storage.storage_capacity
+        # Mark the storage as booked
+        storage.status = "rented"
+        storage.current_occupancy = storage.storage_capacity  # Optional: assume fully used
         storage.save()
 
-        return Response({'message': f'Storage {storage.storage_location} has been rented.'})
+        return Response({"message": "Storage booked successfully."}, status=status.HTTP_200_OK)
+
+    except StorageProvider.DoesNotExist:
+        return Response({"detail": "Storage not found."}, status=status.HTTP_404_NOT_FOUND)

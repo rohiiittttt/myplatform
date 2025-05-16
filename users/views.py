@@ -22,6 +22,7 @@ from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, Ou
 from .serializers import UserRegistrationSerializer, UserSerializer, CustomTokenObtainPairSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth.decorators import login_required
 
 # ===================== API VIEWS =====================
 
@@ -148,3 +149,8 @@ def buyer_products_page(request):
 
 def settings_page(request):
     return render(request, 'settings_page.html')
+
+
+
+def storage_page(request):
+    return render(request, 'storage_page.html')
