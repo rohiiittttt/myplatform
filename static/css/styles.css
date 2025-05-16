@@ -457,3 +457,56 @@ body {
   background-color: #5b4cd6;
   transform: translateY(-2px);
 }
+
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.container h2 {
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+#settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#settings-form input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 95%;
+}
+
+#settings-form button {
+  padding: 12px;
+  background-color: var(--highlight);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#settings-form button:hover {
+  background-color: #5b4cd6;
+}
+
+#status-msg {
+  margin-top: 20px;
+  font-weight: 500;
+  color: #00cc66;
+}
