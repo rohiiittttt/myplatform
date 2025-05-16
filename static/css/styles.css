@@ -491,7 +491,25 @@ body {
 
 #settings-form button {
   padding: 12px;
-  
+  background-color: var(--highlight);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#settings-form button:hover {
+  background-color: #5b4cd6;
+}
+
+#status-msg {
+  margin-top: 20px;
+  font-weight: 500;
+  color: #00cc66;
+}
+
 .storage-card {
   background-color: var(--card-bg);
   border-radius: 12px;
@@ -534,16 +552,6 @@ body {
   cursor: pointer;
   font-weight: 500;
   transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#settings-form button:hover {
-  background-color: #5b4cd6;
-}
-
-#status-msg {
-  margin-top: 20px;
-  font-weight: 500;
-  color: #00cc66;
 }
 
 .book-btn:hover {
