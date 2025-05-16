@@ -55,7 +55,7 @@ class ProductDeleteView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class AvailableProductsForBuyer(APIView):  # ✅ un-indented properly
+class AvailableProductsForBuyer(APIView):  
     permission_classes = [IsAuthenticated]
 
     def get(self, request):

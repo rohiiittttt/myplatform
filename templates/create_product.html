@@ -1,30 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 <div class="main-content">
     <div class="header-section">
-        <button class="back-btn" onclick="window.location.href='{% url 'products_page' %}'">
-          <i class="fas fa-arrow-left"></i>
+        <button id="back-btn" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
         </button>
         <h1 class="page-title">Create Product</h1>
     </div>
+
     <form id="create-product-form" class="auth-form">
         <label for="name">Product Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+        <input type="text" id="name" name="name" placeholder="Enter product name" required><br><br>
 
         <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
+        <textarea id="description" name="description" placeholder="Enter product description" required></textarea><br><br>
 
         <label for="price">Price:</label><br>
-        <input type="number" id="price" name="price" required><br><br>
+        <input type="number" id="price" name="price" placeholder="Enter price" step="0.01" required><br><br>
 
         <label for="stock">Stock:</label><br>
-        <input type="number" id="stock" name="stock" required><br><br>
+        <input type="number" id="stock" name="stock" placeholder="Enter stock quantity" required><br><br>
 
-        <button type="submit">Add Product</button>
+        <button type="submit" class="submit-btn">Add Product</button>
     </form>
 </div>
 
-<!-- Load the JS file -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('back-btn').addEventListener('click', function () {
+            window.location.href = "{% url 'products_page' %}";
+        });
+    });
+</script>
+
 <script src="{% static 'js/create_product.js' %}"></script>
 {% endblock %}

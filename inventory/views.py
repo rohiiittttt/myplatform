@@ -3,7 +3,7 @@ from .models import InventoryEntry
 from .serializers import InventoryEntrySerializer
 
 class InventoryEntryViewSet(viewsets.ModelViewSet):
-    queryset = InventoryEntry.objects.all()  # ✅ ADD THIS LINE
+    queryset = InventoryEntry.objects.all() 
     serializer_class = InventoryEntrySerializer
     permission_classes = [permissions.IsAuthenticated]
 

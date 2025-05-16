@@ -16,7 +16,7 @@ async function loadMessages() {
     try {
         chatBox.innerHTML = "Loading messages...";
 
-        const res = await fetch('/api/messaging/', {  // ✅ CORRECT endpoint
+        const res = await fetch('/api/messaging/', {  
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -49,14 +49,14 @@ async function sendMessage() {
     }
 
     try {
-        const res = await fetch('/api/messaging/', {  // ✅ CORRECT endpoint
+        const res = await fetch('/api/messaging/', {  
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                recipient: recipientUsername,           // username instead of ID
+                recipient: recipientUsername,           
                 message_content: content,
                 message_type: "dm"
             })

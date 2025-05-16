@@ -5,7 +5,7 @@ from django.db.models import Q
 
 User = get_user_model()
 
-class OrderRequest(models.Model):  # ✅ Exact name
+class OrderRequest(models.Model):  
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='placed_orders')
     quantity = models.PositiveIntegerField()
