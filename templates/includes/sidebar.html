@@ -32,8 +32,8 @@
             <li class="{% if request.path == '/storage/' %}active{% endif %}">
                 <a href="{% url 'storage_page' %}"><i class="fas fa-store-alt"></i> <span>Rent Space</span></a>
             </li>
-            <li><i class="fas fa-question-circle"></i> <span>FAQ</span></li>
-            <li><i class="fas fa-bell"></i> <span>Notification</span></li>
+            <!-- <li><i class="fas fa-question-circle"></i> <span>FAQ</span></li>
+            <li><i class="fas fa-bell"></i> <span>Notification</span></li> -->
             <li class="{% if request.path == '/settings/' %}active{% endif %}">
                 <a href="{% url 'settings_page' %}"><i class="fas fa-cog"></i> <span>Settings</span></a>
             </li>

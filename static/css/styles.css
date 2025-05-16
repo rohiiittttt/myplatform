@@ -691,3 +691,113 @@ body {
   font-weight: 700;
   margin-right: 6px;
 }
+
+
+.product-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.small-card {
+  background-color: var(--card-bg, #fff);
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* .product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-weight: 500;
+  gap: 20px;
+}
+
+.product-row span {
+  flex: 1;
+  color: var(--text-color);
+}
+
+.product-row button.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.product-row button.delete-btn:hover {
+  background-color: #c0392b;
+} */
+
+
+
+
+.product-card-message-style {
+  background-color: var( --bg-main);
+  color:  var(--text-color);
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-card-message-style span {
+  font-weight: 600;
+  color:  var(--text-color);
+}
+
+.product-card-message-style .delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.product-card-message-style .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.dashboard-storage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dashboard-storage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.storage-row {
+  background-color:  var( --bg-main);;
+  padding: 14px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.storage-row span {
+  margin: 0 10px;
+}
