@@ -16,30 +16,37 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("settings-form").addEventListener("submit", async (e) => {
+    const form = document.getElementById("settings-form");
+    const msg = document.getElementById("status-msg");
+
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem("token");
         const username = document.getElementById("username").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        const res = await fetch("/api/update-user/", {
-            method: "PUT",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username, email, password })
-        });
+        try {
+            const response = await fetch("/api/update-user/", {
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("access"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, email, password })
+            });
 
-        const msg = document.getElementById("status-msg");
-
-        if (res.ok) {
-            msg.innerText = "Updated successfully.";
-        } else {
-            const data = await res.json();
-            msg.innerText = "Update failed: " + JSON.stringify(data);
+            if (response.ok) {
+                msg.innerText = "Updated successfully.";
+                msg.style.color = "green";
+            } else {
+                const data = await response.json();
+                msg.innerText = "Update failed: " + (data.detail || JSON.stringify(data));
+                msg.style.color = "red";
+            }
+        } catch (error) {
+            msg.innerText = "An error occurred.";
+            msg.style.color = "red";
         }
     });
 });

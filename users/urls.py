@@ -12,7 +12,7 @@ from .views import buyer_orders_view
 from . import views
 from .views import UpdateUserInfoView
 from .views import settings_page
-
+from .views import storage_page
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -22,6 +22,7 @@ urlpatterns = [
     path('login/', login_page, name='login_page'),
     path('register/', register_page, name='register_page'),
     path('dashboard/', dashboard_view, name='dashboard'),
+     path('storage/', storage_page, name='storage_page'),
 
     # API Endpoints
     path('api/login/', TokenObtainPairView.as_view(), name='login_api'),
