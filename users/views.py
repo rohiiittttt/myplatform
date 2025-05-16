@@ -24,7 +24,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.decorators import login_required
 
-# ===================== API VIEWS =====================
+
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
@@ -110,7 +110,7 @@ class UpdateUserInfoView(APIView):
 
         user.save()
         return Response({"message": "User information updated successfully."})
-# ===================== PAGE VIEWS =====================
+
 
 def dashboard_view(request):
     return render(request, 'dashboard.html')
@@ -145,7 +145,7 @@ def buyer_orders_view(request):
 from django.shortcuts import render
 
 def buyer_products_page(request):
-    return render(request, 'buyer_products.html')  # Make sure you create this HTML file later
+    return render(request, 'buyer_products.html')  
 
 def settings_page(request):
     return render(request, 'settings_page.html')

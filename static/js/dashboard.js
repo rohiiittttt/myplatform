@@ -155,7 +155,7 @@ function logout() {
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchUserInfo();
-    loadDashboardMessages(); // Load messages into dashboard
+    loadDashboardMessages();
     fetchProducts();
     fetchRentedStorages();
   });

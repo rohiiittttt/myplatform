@@ -11,7 +11,7 @@ class OrderRequestViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return OrderRequest.objects.filter(Q(buyer=user) | Q(product__user=user))  # ✅ fixed here
+        return OrderRequest.objects.filter(Q(buyer=user) | Q(product__user=user))  
 
     def perform_create(self, serializer):
         serializer.save(buyer=self.request.user)

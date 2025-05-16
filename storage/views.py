@@ -25,9 +25,9 @@ def book_storage(request, storage_id):
         if storage.status != "available":
             return Response({"detail": "Storage not available."}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Mark the storage as booked
+     
         storage.status = "rented"
-        storage.current_occupancy = storage.storage_capacity  # Optional: assume fully used
+        storage.current_occupancy = storage.storage_capacity  
         storage.save()
 
         return Response({"message": "Storage booked successfully."}, status=status.HTTP_200_OK)

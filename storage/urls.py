@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import StorageListView, book_storage  # ✅ ONLY these are needed
+from .views import StorageListView, book_storage  
 
 urlpatterns = [
     path('', StorageListView.as_view(), name='storage-list'),

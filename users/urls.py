@@ -18,13 +18,13 @@ router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
 
 urlpatterns = [
-    # HTML Pages
+
     path('login/', login_page, name='login_page'),
     path('register/', register_page, name='register_page'),
     path('dashboard/', dashboard_view, name='dashboard'),
      path('storage/', storage_page, name='storage_page'),
 
-    # API Endpoints
+
     path('api/login/', TokenObtainPairView.as_view(), name='login_api'),
     path('api/register/', RegisterView.as_view(), name='register_api'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
@@ -33,7 +33,6 @@ urlpatterns = [
     path('api/update-user/', UpdateUserInfoView.as_view(), name='update_user_info'),
 
 
-    # Frontend pages
     path('chat/', messaging_page, name='messaging_page'),
     path('orders/seller/', orders_page, name='orders_page'),
     path('orders/buyer/', buyer_orders_view, name='buyer_orders_page'),

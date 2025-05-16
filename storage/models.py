@@ -9,7 +9,7 @@ class StorageProvider(models.Model):
     storage_capacity = models.PositiveIntegerField()
     current_occupancy = models.PositiveIntegerField(default=0)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=20, default='available')  # New field
+    status = models.CharField(max_length=20, default='available')  
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -14,7 +14,7 @@ class Product(models.Model):
     category = models.CharField(max_length=255, blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
     
-    # ✅ Add defaults for migrations to succeed
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
