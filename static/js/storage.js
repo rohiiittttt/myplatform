@@ -23,9 +23,8 @@ async function fetchStorages() {
                 <p><strong>Occupancy:</strong> ${storage.current_occupancy}</p>
                 <p>${storage.description || ''}</p>
                 <p><strong>Status:</strong> ${storage.status}</p>
-                ${storage.status === "available" ? 
-                    `<button class="book-btn" onclick="bookStorage(${storage.id})">Book</button>` 
-                    : ""}
+${storage.status === 'available' ? `<button class="book-btn" onclick="bookStorage(${storage.id})">Book</button>` : ''}
+
             </div>
         `).join("");
 
